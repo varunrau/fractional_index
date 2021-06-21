@@ -1,6 +1,6 @@
 # FractionalIndex
 
-**TODO: Add description**
+An Elixir implementation of David Greenspan's [Fractional Indexing](https://observablehq.com/@dgreensp/implementing-fractional-indexing)
 
 ## Installation
 
@@ -18,4 +18,3 @@ end
 Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
 and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
 be found at [https://hexdocs.pm/fractional_index](https://hexdocs.pm/fractional_index).
-

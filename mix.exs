@@ -7,7 +7,17 @@ defmodule FractionalIndex.MixProject do
       version: "0.1.0",
       elixir: "~> 1.11",
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      deps: deps(),
+      description:
+        "Fractional indexing is a string based index that is useful for ordering in a database.",
+      package: package()
+    ]
+  end
+
+  def package do
+    [
+      licenses: ["MIT"],
+      links: %{"GitHub" => "https://github.com/varunrau/fractional_index"}
     ]
   end
 
