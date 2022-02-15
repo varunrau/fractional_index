@@ -48,4 +48,8 @@ defmodule FractionalIndexTest do
     assert {:ok, "a0"} = FractionalIndex.generate_key_between("Zz", "a01")
     assert {:ok, "Zz"} = FractionalIndex.generate_key_between(nil, "a0")
   end
+
+  test ":invalid_order_key_head does not raise a MatchError" do
+    assert {:error, :invalid_order_key} == FractionalIndex.generate_key_between("0", "1")
+  end
 end
