@@ -47,9 +47,43 @@ defmodule FractionalIndexTest do
     assert {:ok, "ZzV"} = FractionalIndex.generate_key_between("Zz", "a0")
     assert {:ok, "a0"} = FractionalIndex.generate_key_between("Zz", "a01")
     assert {:ok, "Zz"} = FractionalIndex.generate_key_between(nil, "a0")
+    assert {:ok, "Zy"} == FractionalIndex.generate_key_between(nil, "Zz")
+    assert {:ok, "a1"} == FractionalIndex.generate_key_between("a0", nil)
+    assert {:ok, "a2"} == FractionalIndex.generate_key_between("a1", nil)
+    assert {:ok, "a0V"} == FractionalIndex.generate_key_between("a0", "a1")
+    assert {:ok, "a1V"} == FractionalIndex.generate_key_between("a1", "a2")
+    assert {:ok, "a0l"} == FractionalIndex.generate_key_between("a0V", "a1")
+    assert {:ok, "a0"} == FractionalIndex.generate_key_between("Zz", "a1")
+    assert {:ok, "Xzzz"} == FractionalIndex.generate_key_between(nil, "Y00")
+    assert {:ok, "c000"} == FractionalIndex.generate_key_between("bzz", nil)
+    assert {:ok, "a0G"} == FractionalIndex.generate_key_between("a0", "a0V")
+    assert {:ok, "a08"} == FractionalIndex.generate_key_between("a0", "a0G")
+    assert {:ok, "b127"} == FractionalIndex.generate_key_between("b125", "b129")
+    assert {:ok, "a1"} == FractionalIndex.generate_key_between("a0", "a1V")
+    assert {:ok, "a0"} == FractionalIndex.generate_key_between("Zz", "a01")
+    assert {:ok, "a0"} == FractionalIndex.generate_key_between(nil, "a0V")
+    assert {:ok, "b99"} == FractionalIndex.generate_key_between(nil, "b999")
+
+    assert {:ok, "A000000000000000000000000000V"} ==
+             FractionalIndex.generate_key_between(nil, "A000000000000000000000000001")
+
+    assert {:ok, "zzzzzzzzzzzzzzzzzzzzzzzzzzz"} ==
+             FractionalIndex.generate_key_between("zzzzzzzzzzzzzzzzzzzzzzzzzzy", nil)
+
+    assert {:ok, "zzzzzzzzzzzzzzzzzzzzzzzzzzzV"} ==
+             FractionalIndex.generate_key_between("zzzzzzzzzzzzzzzzzzzzzzzzzzz", nil)
   end
 
   test ":invalid_order_key_head does not raise a MatchError" do
     assert {:error, :invalid_order_key} == FractionalIndex.generate_key_between("0", "1")
+  end
+
+  test "generate_key_between() checks arguments" do
+    assert {:error, :invalid_order_key} ==
+             FractionalIndex.generate_key_between(nil, "A00000000000000000000000000")
+
+    assert {:error, :invalid_order_key} == FractionalIndex.generate_key_between("a00", nil)
+    assert {:error, :invalid_order_key} == FractionalIndex.generate_key_between("a00", "a1")
+    assert {:error, :wrong_order} == FractionalIndex.generate_key_between("a1", "a0")
   end
 end
