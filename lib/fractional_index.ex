@@ -133,12 +133,13 @@ defmodule FractionalIndex do
   def validate_order_key("A00000000000000000000000000"), do: :invalid_key
 
   def validate_order_key(key) do
-    {:ok, i} = get_integer_part(key)
-    f = String.slice(key, String.length(i)..String.length(key))
+    with {:ok, i} <- get_integer_part(key) do
+      f = String.slice(key, String.length(i)..String.length(key))
 
-    case String.last(f) do
-      "0" -> :invalid_key
-      _ -> :ok
+      case String.last(f) do
+        "0" -> :invalid_key
+        _ -> :ok
+      end
     end
   end
 
