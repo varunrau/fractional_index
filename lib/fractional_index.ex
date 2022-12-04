@@ -165,7 +165,7 @@ defmodule FractionalIndex do
           "#{h}#{digs}0"
 
         true ->
-          "#{h}#{String.slice(digs, 0..(String.length(digs) - 1))}"
+          "#{h}#{String.slice(digs, 0, String.length(digs) - 1)}"
       end
     else
       "#{head}#{digs}"
