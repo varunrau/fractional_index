@@ -63,6 +63,7 @@ defmodule FractionalIndexTest do
     assert {:ok, "a0"} == FractionalIndex.generate_key_between("Zz", "a01")
     assert {:ok, "a0"} == FractionalIndex.generate_key_between(nil, "a0V")
     assert {:ok, "b99"} == FractionalIndex.generate_key_between(nil, "b999")
+    assert {:ok, "Z0"} == FractionalIndex.generate_key_between("Yzz", "Z0G")
 
     assert {:ok, "A000000000000000000000000000V"} ==
              FractionalIndex.generate_key_between(nil, "A000000000000000000000000001")
